@@ -1,14 +1,20 @@
-import Layout from "../components/Layout";
+import Layout from "../components/shared/Layout";
 import TodoList from "../components/Todo/TodoList";
 import {
 	Container,
-	Topbar,
+	Box,
+	Title,
+	FilterButton,
+	Button,
+	BackgroundImage,
+} from "../components/shared/styles";
+
+import {
+	TodoInputWrapper,
 	InputTodo,
-	CompleteButton,
-	Select,
+	CheckButton,
 } from "../components/Todo/styles";
 
-import { FaPlus } from "react-icons/fa";
 import { useState, useContext } from "react";
 import { ActionTypes } from "../interfaces";
 import { TodoContext } from "../store/store";
@@ -24,7 +30,7 @@ const IndexPage = () => {
 		setInput(e.target.value);
 	}
 
-	function changeSelect(e: React.ChangeEvent<HTMLSelectElement>) {
+	function changeSelect(e: React.MouseEvent<HTMLButtonElement>) {
 		e.preventDefault();
 		setSelect(e.target.value);
 	}
@@ -39,26 +45,71 @@ const IndexPage = () => {
 	}
 
 	return (
-		<Layout title="Todo App">
-			<Container>
-				<Topbar>
-					<InputTodo
-						placeholder="Enter your Task"
-						value={input}
-						onChange={changeInput}
-					/>
-					<CompleteButton onClick={() => addTodo()}>
-						<FaPlus />
-					</CompleteButton>
-					<Select value={select} onChange={changeSelect}>
-						<option value={"FILTER_ALL"}>All</option>
-						<option value={"SHOW_COMPLETED"}>Completed</option>
-						<option value={"SHOW_ACTIVE"}>Uncompleted</option>
-					</Select>
-				</Topbar>
-				<TodoList filter={select} />
-			</Container>
-		</Layout>
+		<>
+			<BackgroundImage />
+			<Layout title="Todo App">
+				<Container>
+					<Box
+						alignItems="center"
+						justifyContent="space-between"
+						mb={5}>
+						<Title>Todo</Title>
+						<Button>
+							<img src="icon-sun.svg" alt="Sun icon" />
+						</Button>
+					</Box>
+					<TodoInputWrapper
+						alignItems="center"
+						justifyContent="start"
+						mb={3}
+						px={3}>
+						<CheckButton onClick={addTodo}>
+							<img src="icon-check.svg" alt="Check icon" />
+						</CheckButton>
+						<InputTodo
+							placeholder="Create a new todo..."
+							value={input}
+							onChange={changeInput}
+						/>
+					</TodoInputWrapper>
+					<TodoList select={select} changeSelect={changeSelect} />
+					<Box
+						display={["flex", "none", null, null]}
+						bg="blue.100"
+						borderRadius="10px"
+						alignItems="center"
+						justifyContent="center"
+						my={3}
+						py={2}
+						px={3}>
+						<FilterButton
+							active={select === "FILTER_ALL"}
+							onClick={changeSelect}
+							fontWeight="700"
+							fontSize={3}
+							value="FILTER_ALL">
+							All
+						</FilterButton>
+						<FilterButton
+							active={select === "SHOW_ACTIVE"}
+							onClick={changeSelect}
+							fontWeight="700"
+							fontSize={3}
+							value="SHOW_ACTIVE">
+							Active
+						</FilterButton>
+						<FilterButton
+							active={select === "SHOW_COMPLETED"}
+							onClick={changeSelect}
+							fontWeight="700"
+							fontSize={3}
+							value="SHOW_COMPLETED">
+							Completed
+						</FilterButton>
+					</Box>
+				</Container>
+			</Layout>
+		</>
 	);
 };
 

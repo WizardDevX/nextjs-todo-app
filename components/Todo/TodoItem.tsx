@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { Item, Topbar, CompleteButton, DeleteButton } from "./styles";
-import { FaCheck, FaTimes } from "react-icons/fa";
+import { Box, Text, Button } from "../shared/styles";
+import { CheckButton } from "./styles";
 import { Todo, ActionTypes } from "../../interfaces";
 import { TodoContext } from "../../store/store";
 
@@ -8,28 +8,50 @@ const TodoItem = (todo: Todo) => {
 	const { dispatchTodo } = useContext(TodoContext);
 
 	return (
-		<Topbar>
-			<Item completed={todo.completed}>{todo.task}</Item>
-			<CompleteButton
-				onClick={() => {
-					dispatchTodo!({
-						type: ActionTypes.CHECK_TODO,
-						id: todo.id,
-					});
-				}}>
-				<FaCheck />
-			</CompleteButton>
-			<DeleteButton
-				onClick={() => {
-					if (confirm("Are you sure?"))
+		<Box
+			as="li"
+			alignItems="center"
+			justifyContent="space-between"
+			py={1}
+			px={3}>
+			<Box alignItems="center" justifyContent="center">
+				<CheckButton
+					completed={todo.completed}
+					onClick={() => {
 						dispatchTodo!({
-							type: ActionTypes.DELETE_TODO,
+							type: ActionTypes.CHECK_TODO,
 							id: todo.id,
 						});
-				}}>
-				<FaTimes />
-			</DeleteButton>
-		</Topbar>
+					}}>
+					<img src="icon-check.svg" alt="Check icon" />
+				</CheckButton>
+				<Text
+					as="button"
+					completed={todo.completed}
+					fontWeight="400"
+					fontSize={2}
+					onClick={() => {
+						dispatchTodo!({
+							type: ActionTypes.CHECK_TODO,
+							id: todo.id,
+						});
+					}}>
+					{todo.task}
+				</Text>
+			</Box>
+			{!todo.completed && (
+				<Button
+					onClick={() => {
+						if (confirm("Are you sure?"))
+							dispatchTodo!({
+								type: ActionTypes.DELETE_TODO,
+								id: todo.id,
+							});
+					}}>
+					<img src="icon-cross.svg" alt="Cross icon" />
+				</Button>
+			)}
+		</Box>
 	);
 };
 

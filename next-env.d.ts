@@ -3,15 +3,9 @@
 
 import {} from "styled-components/cssprop";
 import { DefaultTheme } from "styled-components";
+import { darkTheme as theme } from './theme'
 
 declare module "styled-components" {
-	export interface DefaultTheme {
-		colors: {
-			primary: string;
-			secondary1: string;
-			secondary2: string;
-			terciary1: string;
-			terciary2: string;
-		};
-	}
+	type Theme = typeof theme
+	export interface DefaultTheme extends Theme 
 }

@@ -13,16 +13,21 @@ export const todoReducer = (state: Todo[], action: ActionTodo): Todo[] => {
 			return [...state, newTodo];
 		}
 		case ActionTypes.DELETE_TODO: {
-			return state.filter(todo => todo.id !== action.id);
+			return state.filter((todo) => todo.id !== action.id);
 		}
 
 		case ActionTypes.CHECK_TODO: {
-			return state.map(todo => {
+			return state.map((todo) => {
 				if (todo.id !== action.id) return todo;
 
 				return { ...todo, completed: !todo.completed };
 			});
 		}
+
+		case ActionTypes.CLEAR_ALL: {
+			return [];
+		}
+
 		default: {
 			return state;
 		}

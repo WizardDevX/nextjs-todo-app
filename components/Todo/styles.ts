@@ -1,64 +1,60 @@
 import styled from "styled-components";
+import { Box, Button } from "../shared/styles";
 
-export const Container = styled.div`
-	position: relative;
-	width: 40%;
-	height: 700px;
-	margin: 5em auto;
-	border-radius: 20px;
-	background-color: transparent;
-	padding: 2em;
-	border: 1px solid ${({ theme }) => theme.colors.terciary2};
-`;
-
-export const Topbar = styled.div`
-	display: flex;
-	align-items: center;
-	width: 100%;
+export const TodoInputWrapper = styled(Box)`
+	gap: 1rem;
+	border-radius: 10px;
+	background-color: ${({ theme }) => theme.colors.blue[100]};
 `;
 
 export const InputTodo = styled.input`
-	border: 1px solid ${({ theme }) => theme.colors.secondary1};
-	width: 60%;
-	padding: 1em 2em;
+	width: calc(100% - 1.5rem - 30px);
+	padding: 1rem 0;
+	font-size: 0.8rem;
+	font-weight: 400;
+	color: ${({ theme }) => theme.colors.gray[100]};
+	border: none;
+	background: transparent;
+	caret-color: ${({ theme }) => theme.colors.blue[50]};
+
+	&::placeholder {
+		color: ${({ theme }) => theme.colors.gray[700]};
+		opacity: 1;
+	}
 `;
 
-export const List = styled.ul`
+export const CheckButton = styled(Button)<{ completed?: boolean }>`
+	width: 30px;
+	height: 30px;
+	border: ${({ completed, theme }) =>
+		completed ? "none" : `1px solid ${theme.colors.gray[900]}`};
+	border-radius: 50%;
+	background: ${({ completed, theme }) =>
+		completed ? theme.colors.blue.gradient : "transparent"};
+	transition: all 0.3s ease;
+
+	& > img {
+		transition: all 0.3s ease;
+		opacity: ${({ completed }) => (completed ? "1" : "0")};
+	}
+
+	&:hover {
+		border: ${({ theme }) => `1px solid ${theme.colors.blue.gradient}`};
+	}
+`;
+
+export const TodoListWrapper = styled.ul`
+	max-height: 400px;
 	list-style: none;
-	margin-top: 4em;
-`;
+	background-color: ${({ theme }) => theme.colors.blue[100]};
+	border-radius: 10px 10px 0 0;
+	overflow-y: auto;
 
-export const Item = styled.li<{ completed: boolean }>`
-	border: 1px solid ${({ theme }) => theme.colors.secondary1};
-	padding: 0.8em 2em;
-	width: 80%;
-	background-color: #fff;
-	text-decoration-line: ${({ completed }) =>
-		completed ? "line-through" : "none"};
-	opacity: ${({ completed }) => (completed ? ".5" : "1")};
-`;
+	& > ${Box}:not(:last-child) {
+		border-bottom: 1px solid ${({ theme }) => theme.colors.gray[800]};
+	}
 
-export const CompleteButton = styled.button`
-	background-color: ${({ theme }) => theme.colors.secondary1};
-	font-size: 24px;
-	color: #fff;
-	width: 45px;
-	height: 45px;
-	border: none;
-	cursor: pointer;
-`;
-
-export const DeleteButton = styled(CompleteButton)`
-	background-color: ${({ theme }) => theme.colors.secondary2};
-`;
-
-export const Select = styled.select`
-	appearance: none;
-	width: 20%;
-	height: 48px;
-	margin-left: auto;
-	border: none;
-	padding: 1em;
-	transition: all 0.25s ease;
-	cursor: pointer;
+	& > li {
+		height: 60px;
+	}
 `;

@@ -1,10 +1,7 @@
 import App from "next/app";
-import {
-	ThemeProvider,
-	createGlobalStyle,
-	DefaultTheme,
-} from "styled-components";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 import TodoProvider from "../store/store";
+import { darkTheme as theme } from "../theme";
 
 const GlobalStyles = createGlobalStyle`
 	html {
@@ -19,23 +16,28 @@ const GlobalStyles = createGlobalStyle`
 		padding: 0;
 		box-sizing: inherit;
 		font-family: sans-serif;
+		font-size: 18px;
 	}
 
 	body {
-		background-color: ${({ theme }) => theme.colors.primary};
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: ${({ theme }) => theme.colors.blue[900]};
+	}
+
+	button {
+		border: none;
+		background: none;
+		cursor: pointer;
+	}
+
+	#__next {
+		width: 100%;
 	}
 
 `;
-
-const theme: DefaultTheme = {
-	colors: {
-		primary: "#ff9770",
-		secondary1: "#70d6ff",
-		secondary2: "#ff70a6",
-		terciary1: "#ffd670",
-		terciary2: "#e9ff70",
-	},
-};
 
 export default class MyApp extends App {
 	render() {
