@@ -4,6 +4,8 @@ import TodoProvider from "../store/store";
 import { darkTheme as theme } from "../theme";
 
 const GlobalStyles = createGlobalStyle`
+	@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+	
 	html {
 		box-sizing: border-box;
 	}	
@@ -15,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
 		margin: 0;
 		padding: 0;
 		box-sizing: inherit;
-		font-family: sans-serif;
+		font-family: 'Josefin Sans', sans-serif;
 		font-size: 18px;
 	}
 
