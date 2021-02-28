@@ -3,9 +3,9 @@
 
 import {} from "styled-components/cssprop";
 import { DefaultTheme } from "styled-components";
-import { darkTheme as theme } from './theme'
+import { darkTheme as theme } from "./theme";
 
 declare module "styled-components" {
-	type Theme = typeof theme
-	export interface DefaultTheme extends Theme 
+	type Theme = typeof theme;
+	export interface DefaultTheme extends Theme {}
 }
