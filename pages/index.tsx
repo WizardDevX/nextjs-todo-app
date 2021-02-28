@@ -32,7 +32,8 @@ const IndexPage = () => {
 
 	function changeSelect(e: React.MouseEvent<HTMLButtonElement>) {
 		e.preventDefault();
-		setSelect(e.target.value);
+		const target = e.target as HTMLButtonElement;
+		setSelect(target.value);
 	}
 
 	function addTodo() {

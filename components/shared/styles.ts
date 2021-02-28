@@ -15,7 +15,6 @@ import {
 	typography,
 	border,
 } from "styled-system";
-import { TodoListWrapper } from "../Todo/styles";
 
 export const Title = styled.h1`
 	font-size: 2.5rem;
@@ -90,12 +89,12 @@ export const Button = styled.button`
 	transition: all 0.3s ease;
 
 	@media screen and (min-width: 640px) {
-		${TodoListWrapper} li & {
+		li & {
 			opacity: 0;
 			pointer-events: none;
 		}
 
-		${TodoListWrapper} li:hover & {
+		li:hover & {
 			opacity: 1;
 			pointer-events: all;
 		}
